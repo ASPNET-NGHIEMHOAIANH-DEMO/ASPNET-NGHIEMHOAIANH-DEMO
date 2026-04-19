@@ -6,7 +6,7 @@
 Website được xây dựng nhằm mang lại trải nghiệm nghe nhạc mượt mà với giao diện thân thiện, hỗ trợ phát nhạc liên tục, tạo playlist và tìm kiếm bài hát theo từ khóa.
 
 ## ✨ Tính năng chính
-* **Đăng ký & Đăng nhập:** Quản lý tài khoản người dùng bằng JWT.
+* **Đăng ký & Đăng nhập:** Quản lý tài khoản người dùng.
 * **Phát nhạc:** Điều khiển phát/dừng, chuyển bài, lặp lại và phát ngẫu nhiên.
 * **Tìm kiếm:** Tìm kiếm bài hát, ca sĩ hoặc album theo thời gian thực.
 * **Quản lý Playlist:** Tạo, xóa và thêm bài hát vào danh sách phát yêu thích.

@@ -1,0 +1,286 @@
+:root{
+    --bg-dark:#0b0b0d;
+    --purple-1:#8b3bf6;
+    --purple-2:#ff48b8;
+    --muted:#bdb6c9;
+}
+html,body{height:100%;margin:0;font-family:'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;background:var(--bg-dark);color:#fff}
+body{
+    background: var(--bg-dark);
+    min-height:100vh;
+}
+@supports (background-image: url("../Content/bg.jpg")) { 
+}
+.site-header{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;align-items:center;justify-content:space-between;padding:18px 48px}
+.site-header .logo{display:flex;align-items:center;gap:12px;font-weight:800}
+.site-header nav{display:flex;gap:28px;align-items:center}
+.site-header nav a{color:rgba(255,255,255,.9);text-decoration:none;font-weight:500}
+.site-header .actions{display:flex;gap:12px;align-items:center}
+.btn-pill{padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(90deg,var(--purple-1),var(--purple-2));color:#fff;font-weight:600}
+
+.hero{height:620px;background-image: url('bg.jpg');background-size:cover;background-position:center;position:relative;display:flex;align-items:flex-end}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,6,20,0.2) 20%, rgba(10,5,12,0.9) 85%)}
+.hero-inner{position:relative;z-index:2;padding:100px 80px 60px;max-width:1100px}
+.badge{display:inline-block;border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:999px;font-size:12px;color:var(--muted);margin-bottom:18px}
+.hero-title{font-size:72px;line-height:0.9;margin:0 0 8px;font-weight:800;letter-spacing:-1px}
+.hero-sub{color:var(--purple-2);font-weight:700;margin-bottom:12px}
+.hero-desc{max-width:640px;color:rgba(255,255,255,.8);margin-bottom:20px}
+.hero-meta{display:flex;gap:24px;color:rgba(255,255,255,.7);margin-bottom:26px}
+.hero-actions{display:flex;gap:14px}
+.btn-outline{padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:transparent;color:#fff}
+
+.search-section{background:#08080a;padding:60px 20px;text-align:center}
+.search-section h3{color:#fff;margin:0 0 18px;font-size:28px}
+.search-box{max-width:760px;margin:0 auto;display:flex;gap:12px}
+.search-box input{flex:1;padding:14px 18px;border-radius:30px;border:1px solid rgba(255,255,255,.06);background:transparent;color:#fff}
+.search-box button{padding:12px 20px;border-radius:30px;border:none;background:linear-gradient(90deg,var(--purple-1),var(--purple-2));color:#fff}
+.tag-list{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.tag{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.06);color:var(--muted);font-size:13px}
+
+@media (max-width:900px){
+    .hero-title{font-size:44px}
+    .site-header{padding:12px 20px}
+    .hero{height:520px}
+    .hero-inner{padding:80px 24px}
+    .search-box{flex-direction:column}
+    .search-box button{width:100%}
+}
+/* Căn giữa form đăng nhập */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.player-controls i:hover {
+    color: #cc00ff; /* Hoặc màu tím gradient giống nút Phát ngay của bạn */
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+
+.floating-player {
+    position: fixed !important;
+    bottom: 30px !important; /* Cách đáy 30px */
+    right: 30px !important; /* Ép dính vào bên phải */
+    left: auto !important; /* BUỘC PHẢI CÓ: Để hủy bỏ mọi lệnh dính bên trái */
+    width: 320px !important; /* Độ rộng cố định */
+    z-index: 9999 !important; /* Nổi trên mọi thành phần khác */
+    display: block !important;
+}
+
+.player-container {
+    background-color: #121212;
+    border-radius: 20px;
+    padding: 15px 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Đảm bảo các icon dàn hàng ngang chuẩn */
+.player-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 10px;
+    color: white;
+}
+
+    #play-pause-btn, #progress-container, .player-controls i {
+        cursor: pointer;
+    }
+
+/* Đảm bảo thanh progress có độ mượt khi chạy */
+.progress-fill {
+    transition: width 0.1s linear;
+}
+
+.progress-dot {
+    transition: left 0.1s linear;
+}
+
+/* Giao diện Modal Thư viện */
+.library-modal {
+    display: none; /* Mặc định ẩn */
+    position: fixed;
+    z-index: 100000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+}
+
+.library-content {
+    background-color: #181818;
+    margin: 10% auto;
+    padding: 20px;
+    width: 400px;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+}
+
+.library-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.close-library {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.song-item {
+    display: flex;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .song-item:hover {
+        background: rgba(255,255,255,0.1);
+    }
+
+.song-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.song-artist {
+    font-size: 12px;
+    color: #aaa;
+}
+
+
+/* Footer Styles */
+.main-footer {
+    background-color: #0a0a0a;
+    padding: 60px 0 20px 0;
+    color: #a0a0a0;
+    font-family: 'Poppins', sans-serif;
+    border-top: 1px solid #1a1a1a;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-column h4 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+    .footer-column ul li {
+        margin-bottom: 12px;
+    }
+
+        .footer-column ul li a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+            .footer-column ul li a:hover {
+                color: #ffffff;
+            }
+
+/* Logo & Desc */
+.music-icon-logo {
+    font-size: 24px;
+    color: #ff2d55;
+    margin-right: 10px;
+}
+
+.brand-text {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.brand-desc {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+/* Social Icons */
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: #1a1a1a;
+    color: white;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+    .social-links a:hover {
+        background: #ff2d55;
+    }
+
+/* Store Buttons */
+.store-btn {
+    display: flex;
+    align-items: center;
+    background: #1a1a1a;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    transition: 0.3s;
+}
+
+    .store-btn:hover {
+        background: #252525;
+    }
+
+    .store-btn i {
+        font-size: 24px;
+        margin-right: 12px;
+    }
+
+    .store-btn span {
+        font-size: 12px;
+    }
+
+    .store-btn strong {
+        display: block;
+        font-size: 15px;
+    }
+
+/* Footer Bottom */
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    padding: 20px;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}

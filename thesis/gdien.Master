@@ -1,0 +1,299 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="gdien.master.cs" Inherits="web_audio_music.gdien" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Web Audio Music</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap&subset=latin-ext" rel="stylesheet">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="Content/site.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header class="site-header">
+            <div class="logo"><img src="https://img.icons8.com/fluency/48/000000/musical-notes.png" style="height:34px"> <span style="font-size:18px">Music</span></div>
+            <nav>
+                
+                <a href="javascript:void(0)" onclick="showTrending()">Thịnh Hành</a>
+                <a href="javascript:void(0)" onclick="toggleLibrary()">Thư Viện</a>
+              
+            </nav>
+            <div class="actions">
+                <div style="display:flex;align-items:center;background:rgba(255,255,255,.03);padding:8px 14px;border-radius:30px;gap:8px">
+                    <asp:TextBox ID="txtGlobalSearch" runat="server" CssClass="global-search" placeholder="Tìm bài hát, nghệ sĩ..." Style="background:transparent;border:0;color:#ddd;outline:none;width:260px"></asp:TextBox>
+                    <asp:Button ID="btnGlobalSearch" runat="server" Text="" OnClick="btnGlobalSearch_Click" Style="background:transparent;border:0;color:#ddd" />
+                </div>
+                <asp:Panel ID="pnlGuest" runat="server">
+                    <a href="#" class="btn-pill" onclick="openAuthModal('login');return false;">Đăng Nhập</a>
+                    <a href="#" style="margin-left:8px;color:var(--purple-2)" onclick="openAuthModal('register');return false;">Đăng ký</a>
+                </asp:Panel>
+                <asp:Panel ID="pnlUser" runat="server" Style="align-items:center">
+                    <asp:Label ID="lblUsername" runat="server" Text="" Style="margin-right:10px;color:#ddd"></asp:Label>
+                    <asp:HyperLink ID="hlManage" runat="server" NavigateUrl="SongsManage.aspx" CssClass="btn-outline" Style="margin-right:8px">Quản lý</asp:HyperLink>
+                    <asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click" CssClass="btn-pill">Đăng xuất</asp:LinkButton>
+                </asp:Panel>
+            </div>
+        </header>
+
+        <section id="heroSection" runat="server" class="hero">
+            <div class="hero-inner">
+                <span class="badge">MỚI PHÁT HÀNH</span>
+                <h1 class="hero-title">Nơi Này Có Anh</h1>
+                <div class="hero-sub">Sơn Tùng M-TP</div>
+                <p class="hero-desc">Bản hit đình đám với hơn 200 triệu lượt nghe, mang âm thanh R&B hiện đại kết hợp cùng giai điệu đầy cảm xúc.</p>
+                <div class="hero-meta">
+                    <div>200M+ lượt nghe</div>
+                    <div>4.8M yêu thích</div>
+                </div>
+                <div class="hero-actions">
+                    <button class="btn-pill" onclick="document.getElementById('play-pause-btn').click(); return false;">
+    &#9658; PHÁT NGAY
+</button>
+                    
+                    <button class="btn-outline">+ THÊM VÀO THƯ VIỆN</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-section">
+            <div style="max-width:900px;margin:0 auto">
+                <div style="color:#8b77a8;font-size:12px;margin-bottom:8px">TÌM KIẾM NHANH</div>
+                <h3>Bạn muốn nghe gì hôm nay?</h3>
+                <div class="search-box">
+                    <asp:TextBox ID="txtSearchBox" runat="server" placeholder="Tìm bài hát, nghệ sĩ, album, playlist..." CssClass="search-input" Style="flex:1;padding:14px 18px;border-radius:30px;border:1px solid rgba(255,255,255,.06);background:transparent;color:#fff"></asp:TextBox>
+                    <asp:Button ID="btnSearchBox" runat="server" Text="Tìm kiếm" CssClass="btn-pill" OnClick="btnSearchBox_Click" />
+                </div>
+                <div class="tag-list">
+                    <div class="tag">V-Pop</div>
+                    <div class="tag">Ballad</div>
+                    <div class="tag">Rap Việt</div>
+                    <div class="tag">EDM</div>
+                    <div class="tag">Acoustic</div>
+                    <div class="tag">R&B</div>
+                    <div class="tag">Indie</div>
+                </div>
+            </div>
+        </section>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <div id="library-modal" class="library-modal">
+    <div class="library-content">
+        <div class="library-header">
+            <h3>Thư Viện Của Bạn</h3>
+            <span class="close-library" onclick="toggleLibrary()">&times;</span>
+        </div>
+        <div class="song-list">
+            <div class="song-item" onclick="playSelectedSong('Music/noi-nay-co-anh.mp3', 'Nơi Này Có Anh', 'Sơn Tùng M-TP')">
+                <div class="song-info">
+                    <p class="song-name">Nơi Này Có Anh</p>
+                    <p class="song-artist">Sơn Tùng M-TP</p>
+                </div>
+            </div>
+            <div class="song-item" onclick="playSelectedSong('Music/nguoi-im-lang-gap-nguoi-hay-noi.mp3', 'Người Im Lặng Gặp Người Hay Nói  ', 'Hiếu Thứ Hai')">
+                <div class="song-info">
+                    <p class="song-name">Người Im Lặng Gặp Người Hay Nói  </p>
+                    <p class="song-artist">Hiếu Thứ Hai</p>
+                </div>
+            </div>
+            <div class="song-item" onclick="playSelectedSong('Music/muon-roi-ma-sao-con.mp3', 'Muộn rồi mà sao còn  ', 'Sơn Tùng M-TP')">
+                <div class="song-info">
+                    <p class="song-name">Muộn rồi mà sao còn  </p>
+                    <p class="song-artist">Sơn Tùng M-TP</p>
+                 </div>
+                </div>
+            <div class="song-item" onclick="playSelectedSong('Music/dung-lam-trai-tim-anh-dau.mp3', 'Đừng làm trái tim anh đau', 'Sơn Tùng M-TP')">
+    <div class="song-info">
+        <p class="song-name">Đừng làm trái tim anh đau  </p>
+        <p class="song-artist">Sơn Tùng M-TP</p>
+     </div>
+    </div>
+            </div>
+    </div>
+</div>
+        
+            
+    
+
+       
+        <footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-column brand-info">
+            <div class="footer-logo">
+                <i class="fas fa-music music-icon-logo"></i>
+                <span class="brand-text">Music</span>
+            </div>
+            <p class="brand-desc">Trải nghiệm âm nhạc đỉnh cao với hàng triệu bài hát từ khắp nơi trên thế giới.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h4>Khám Phá</h4>
+            <ul>
+                <li><a href="#">Nhạc Trending</a></li>
+                <li><a href="#">Playlist Mới</a></li>
+                <li><a href="#">Nghệ Sĩ Nổi Bật</a></li>
+                <li><a href="#">Album Mới Nhất</a></li>
+                <li><a href="#">Radio</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>Hỗ Trợ</h4>
+            <ul>
+                <li><a href="#">Trung Tâm Hỗ Trợ</a></li>
+                <li><a href="#">Điều Khoản Dịch Vụ</a></li>
+                <li><a href="#">Chính Sách Bảo Mật</a></li>
+                <li><a href="#">Liên Hệ</a></li>
+                <li><a href="#">Báo Lỗi</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column app-download">
+            <h4>Tải Ứng Dụng</h4>
+            <a href="#" class="store-btn">
+                <i class="fab fa-apple"></i>
+                <span>Tải trên <strong>App Store</strong></span>
+            </a>
+            <a href="#" class="store-btn">
+                <i class="fab fa-google-play"></i>
+                <span>Tải trên <strong>Google Play</strong></span>
+            </a>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2026 SoundWave. Tất cả quyền được bảo lưu.</p>
+        <p>Được tạo với <i class="fas fa-heart" style="color: #ff2d55;"></i> cho cộng đồng âm nhạc Việt Nam</p>
+    </div>
+</footer>
+
+    </form> <div class="floating-player">
+    <audio id="main-audio" src='<%= ResolveUrl("~/Music/noi-nay-co-anh.mp3") %>'></audio>
+
+    <div class="player-container">
+        <div class="progress-bar" id="progress-container">
+            <div class="progress-fill" id="progress-bar"></div>
+            <div class="progress-dot" id="progress-dot"></div>
+        </div>
+        <div class="player-controls">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-step-backward" id="prev-btn"></i>
+            <div class="play-pause" id="play-pause-btn">
+                <i class="fas fa-play" id="play-icon"></i> </div>
+            <i class="fas fa-step-forward" id="next-btn"></i>
+            <i class="far fa-heart"></i>
+        </div>
+    </div>
+</div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <script>
+    const audio = document.getElementById('main-audio');
+    const playBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const progressDot = document.getElementById('progress-dot');
+    const progressContainer = document.getElementById('progress-container');
+
+    // 1. Xử lý Play/Pause
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playIcon.classList.replace('fa-play', 'fa-pause');
+        } else {
+            audio.pause();
+            playIcon.classList.replace('fa-pause', 'fa-play');
+        }
+    });
+
+    // 2. Cập nhật thanh Progress theo thời gian nhạc chạy
+    audio.addEventListener('timeupdate', (e) => {
+        const { duration, currentTime } = e.srcElement;
+        const progressPercent = (currentTime / duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+        progressDot.style.left = `${progressPercent}%`;
+    });
+
+    // 3. Click vào thanh Progress để nhảy đoạn nhạc
+    progressContainer.addEventListener('click', (e) => {
+        const width = progressContainer.clientWidth;
+        const clickX = e.offsetX;
+        const duration = audio.duration;
+        audio.currentTime = (clickX / width) * duration;
+    });
+
+    // 4. Tự động đổi icon về Play khi hết bài
+    audio.addEventListener('ended', () => {
+        playIcon.classList.replace('fa-pause', 'fa-play');
+        progressBar.style.width = `0%`;
+        progressDot.style.left = `0%`;
+    });
+    </script>
+    <script>
+        // Hàm này để Ẩn hoặc Hiện bảng danh sách Thư viện
+        function toggleLibrary() {
+            const modal = document.getElementById('library-modal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+            } else {
+                modal.style.display = 'block';
+            }
+        }
+
+        // Hàm quan trọng nhất: Xử lý khi người dùng chọn 1 bài hát từ danh sách
+        function playSelectedSong(url, name, artist) {
+            const audio = document.getElementById('main-audio');
+            const playIcon = document.getElementById('play-icon');
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSub = document.querySelector('.hero-sub');
+
+            // 1. Cập nhật đường dẫn nhạc mới
+            audio.src = url;
+
+            // 2. Lệnh phát nhạc
+            audio.play().then(() => {
+                // Nếu phát thành công, đổi icon sang Pause (||)
+                if (playIcon) playIcon.classList.replace('fa-play', 'fa-pause');
+            }).catch(error => {
+                console.log("Lỗi phát nhạc: ", error);
+            });
+
+            // 3. Cập nhật thông tin bài hát hiển thị trên giao diện lớn (Hero Section)
+            if (heroTitle) heroTitle.innerText = name;
+            if (heroSub) heroSub.innerText = artist;
+
+            // 4. Tự động đóng bảng danh sách để người dùng xem giao diện chính
+            toggleLibrary();
+        }
+
+        // Đóng danh sách nếu người dùng click ra ngoài vùng bảng (vùng mờ)
+        window.onclick = function (event) {
+            const modal = document.getElementById('library-modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
